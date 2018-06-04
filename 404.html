@@ -605,7 +605,7 @@ table.CodeRay td.code>pre{padding:0}
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
 <span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2018-06-04 03:20:52 EEST</span>
+<span id="revdate">2018-06-04 05:40:38 EEST</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -675,32 +675,32 @@ seen and used in java.</p>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">  Authorization    +----------------+
-  Bearer           |                |
-  Header  (2) +----|   CLient App   |----+ (1) access_token
-              |    |                |    |
-              |    +----------------+    | POST
-              |                          | /oauth/token
-              V                          V
-   +----------------+              +-----------------+
-   |                |              |                 |
-   |    Resource    |              |  Authorization  |
-   |     Server     |-------------&gt;|     Server      |
-   |                |      (3)     |                 |
-   +----------------+              +-----------------+
-                      POST
-                      /oauth/check_token
+<pre class="CodeRay highlight"><code data-lang="bash">    Authorization    +----------------+
+    Bearer           |                |
+    Header  (2) +----|   CLient App   |----+ (1) access_token
+                |    |                |    |
+                |    +----------------+    | POST
+                |                          | /oauth/token
+                V                          V
+     +----------------+              +-----------------+
+     |                |              |                 |
+     |    Resource    |              |  Authorization  |
+     |     Server     |-------------&gt;|     Server      |
+     |                |      (3)     |                 |
+     +----------------+              +-----------------+
+                        POST
+                        /oauth/check_token
 
-  (1) web-client-app needs obtain access_token from auth-server
-      by using POST /oauth/token request
-  (2) web-client-app using header:
-      'Authorization: Bearer $access_token' can request any
-      secured data from resource-server
-  (3) resource-server will verify client access_token by using
-      POST /oauth/check_token request to auth-server
+ (1) web-client-app needs obtain access_token from auth-server
+     by using POST /oauth/token request
+ (2) web-client-app using header:
+     'Authorization: Bearer $access_token' can request any
+     secured data from resource-server
+ (3) resource-server will verify client access_token by using
+     POST /oauth/check_token request to auth-server
 
-  NOTE: Authorization server could be a bottleneck, so think
-        about it's stability and reliability...</code></pre>
+ NOTE: Authorization server could be a bottleneck, so think
+       about it's stability and reliability...</code></pre>
 </div>
 </div>
 </div>
@@ -1195,7 +1195,7 @@ seen and used in java.</p>
 <div id="footer">
 <div id="footer-text">
 Version 0.0.1<br>
-Last updated 2018-06-04 03:20:52 EEST
+Last updated 2018-06-04 05:40:38 EEST
 </div>
 </div>
 </body>
