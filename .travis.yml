@@ -25,7 +25,7 @@ script:
 - ./gradlew -S >/dev/null
 - ./gradlew --stop || true
 - mkdir -p ~/.m2:/root/.m2 ~/.gradle:/root/.gradle
-- docker-compose build
+- docker-compose build base-image
 - docker-compose run -v ~/.m2:/root/.m2 -v ~/.gradle:/root/.gradle build
 - docker-compose run all
 - docker-compose logs -f -t &

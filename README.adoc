@@ -14,9 +14,9 @@ Checkout link:https://daggerok.github.io/security-first[project reference] :)
 .build and run in docker
 [source,bash]
 ----
+docker-compose build base-image
 docker-compose run -v ~/.m2:/root/.m2 -v ~/.gradle:/root/.gradle build
-docker-compose run all
-docker-compose logs -f -t
+docker-compose run all; docker-compose logs -f -t
 ----
 
 open http://127.0.0.1:8003 and use clientId / secret
