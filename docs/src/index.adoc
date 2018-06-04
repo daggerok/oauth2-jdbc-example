@@ -35,32 +35,32 @@ seen and used in java.
 [source%autofit,bash]
 ----
 
-  Authorization    +----------------+
-  Bearer           |                |
-  Header  (2) +----|   CLient App   |----+ (1) access_token
-              |    |                |    |
-              |    +----------------+    | POST
-              |                          | /oauth/token
-              V                          V
-   +----------------+              +-----------------+
-   |                |              |                 |
-   |    Resource    |              |  Authorization  |
-   |     Server     |------------->|     Server      |
-   |                |      (3)     |                 |
-   +----------------+              +-----------------+
-                      POST
-                      /oauth/check_token
+    Authorization    +----------------+
+    Bearer           |                |
+    Header  (2) +----|   CLient App   |----+ (1) access_token
+                |    |                |    |
+                |    +----------------+    | POST
+                |                          | /oauth/token
+                V                          V
+     +----------------+              +-----------------+
+     |                |              |                 |
+     |    Resource    |              |  Authorization  |
+     |     Server     |------------->|     Server      |
+     |                |      (3)     |                 |
+     +----------------+              +-----------------+
+                        POST
+                        /oauth/check_token
 
-  (1) web-client-app needs obtain access_token from auth-server
-      by using POST /oauth/token request
-  (2) web-client-app using header:
-      'Authorization: Bearer $access_token' can request any
-      secured data from resource-server
-  (3) resource-server will verify client access_token by using
-      POST /oauth/check_token request to auth-server
+ (1) web-client-app needs obtain access_token from auth-server
+     by using POST /oauth/token request
+ (2) web-client-app using header:
+     'Authorization: Bearer $access_token' can request any
+     secured data from resource-server
+ (3) resource-server will verify client access_token by using
+     POST /oauth/check_token request to auth-server
 
-  NOTE: Authorization server could be a bottleneck, so think
-        about it's stability and reliability...
+ NOTE: Authorization server could be a bottleneck, so think
+       about it's stability and reliability...
 
 ----
 
