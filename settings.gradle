@@ -1,0 +1,16 @@
+rootProject.name = 'oauth2-jdbc-example'
+
+[
+    ':docs',
+
+    ':apps:auth-server',
+    ':apps:resource-server',
+    ':apps:web-client-app',
+
+    ':modules:jdbc',
+    ':modules:cors',
+
+    ':modules:props:app',
+    ':modules:props:clients',
+
+].each { include it }

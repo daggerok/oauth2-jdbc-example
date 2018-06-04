@@ -1,0 +1,84 @@
+version: '2.1'
+
+services:
+
+  base-image:
+    build: .
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+
+  build:
+    depends_on:
+      - base-image
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+    volumes:
+      - .:/root/app:rw
+    working_dir: /root/app
+    entrypoint: |
+      bash -c 'bash <<EOF
+      ./gradlew -S build
+      echo "Done."
+      EOF'
+    healthcheck:
+      test: ["CMD-SHELL", "if [ `ls apps/auth-server/build/libs|wc -l` -ne 1 ] || [ `ls apps/result-server/build/libs|wc -l` -ne 1 ] || [ `ls apps/web-client-app/build/libs|wc -l` -ne 1 ] ; then true; else false; fi"]
+      # build period: 900s
+      interval: 30s
+      timeout: 3s
+      retries: 30
+
+  run-auth-server:
+    ports:
+      - '8001:8001'
+    networks:
+      main:
+        aliases:
+          - auth-server
+          - auth-server.daggerok.com
+    volumes:
+      - .:/root/app:rw
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+    entrypoint: bash -c 'bash /root/app/apps/auth-server/build/libs/*.jar'
+
+  run-resource-server:
+    ports:
+      - '8002:8002'
+    networks:
+      main:
+        aliases:
+          - resource-server
+          - resource-server.daggerok.com
+    volumes:
+      - .:/root/app:rw
+    environment:
+      APP_AUTH_SERVER_URL: http://auth-server.daggerok.com:8001
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+    entrypoint: bash -c 'bash /root/app/apps/resource-server/build/libs/*.jar'
+
+  run-web-client-app:
+    ports:
+      - '8003:8003'
+    networks:
+      main:
+        aliases:
+          - web-client-app
+          - web-client-app.daggerok.com
+    environment:
+      APP_AUTH_SERVER_URL: http://0.0.0.0:8001
+      APP_RESOURCE_SERVER_URL: http://0.0.0.0:8002
+    volumes:
+      - .:/root/app:rw
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+    entrypoint: bash -c 'bash /root/app/apps/web-client-app/build/libs/*.jar'
+
+  all:
+    depends_on:
+      - run-auth-server
+      - run-resource-server
+      - run-web-client-app
+    volumes:
+      - .:/root/app:rw
+    image: daggerok/openjdk-8u171-jdk-slim-base-image
+    entrypoint: echo 'running all apps... execute "docker-compose logs -f" command to tail logs'
+
+networks:
+  main:
+    driver: bridge

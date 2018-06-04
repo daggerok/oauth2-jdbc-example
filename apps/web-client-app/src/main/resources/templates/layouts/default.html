@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      class="z-depth-0"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
+  <meta name="description" content="Security First"/>
+  <meta name="author" content="Maksim Kostormin <daggerok@gmail.com>"/>
+
+  <link rel="stylesheet" th:href="@{/webjars/material-design-icons/3.0.1/material-icons.css}"
+        href="/webjars/material-design-icons/3.0.1/material-icons.css">
+  <link rel="stylesheet" th:href="@{/webjars/materialize-css/1.0.0-rc.1/dist/css/materialize.min.css}"
+        href="/webjars/materialize-css/1.0.0-rc.1/dist/css/materialize.css">
+  <link rel="stylesheet" th:href="@{/styles.css}" href="/styles.css">
+
+  <link rel="shortcut icon" th:href="@{/favicon.ico}" href="/favicon.ico" type="image/x-icon">
+
+  <title th:text="#{app.title}"></title>
+</head>
+
+<body>
+
+<div class="navbar-fixed">
+  <nav>
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center truncate" th:text="#{app.title}"></a>
+      <!--<input type="hidden" id="csrf_token" th:name="${_csrf?.parameterName}" th:value="${_csrf?.token}"/>-->
+    </div>
+  </nav>
+</div>
+
+<div class="container-fluid">
+  <main layout:fragment="main">
+    site content...
+  </main>
+</div>
+
+<script th:src="@{/webjars/materialize-css/1.0.0-rc.1/dist/js/materialize.min.js}"
+        src="/webjars/materialize-css/1.0.0-rc.1/dist/js/materialize.js"></script>
+<script th:src="@{/main.js}" src="/main.js"></script>
+
+</body>
+</html>

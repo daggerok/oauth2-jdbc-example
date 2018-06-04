@@ -1,0 +1,71 @@
+= OAuth2 JDBC {project-name} ({project-version})
+////
+image:https://travis-ci.org/daggerok/security-first.svg?branch=master["Build Status", link={github-url}]
+////
+Maksim Kostromin <daggerok@gmail.com>
+{docdatetime}
+:doctype: book
+:toc: left
+:toclevels: 4
+:source-highlighter: prettify
+:numbered:
+:icons: font
+:hide-uri-scheme:
+:revnumber: {project-version}
+:example-caption!:
+
+Travis CI status:
+ifdef::backend-html5[image:https://travis-ci.org/daggerok/oauth2-jdbc-example.svg?branch=master["Build Status", link={github-url}]]
+
+ifdef::backend-html5[link:./index.pdf["Documentation in PFD format"]]
+
+== Introduction
+
+include::../../README.adoc[tags=content,indent=0]
+
+Let's learn and share most important software development topic in the world.
+My personal lifestyle is always think about security first, and only after build any other application functionality.
+Any good framework must provide developers some good security solution ...and spring does.
+**Spring Soot** is amazing framework. It's really one of the best java framework I know.
+As part of it, **Spring Security** provide us a lot of great features - it's easiest security solutions I have ever
+seen and used in java.
+
+== Application work-flow diagram
+
+[source%autofit,bash]
+----
+
+  Authorization    +----------------+
+  Bearer           |                |
+  Header  (2) +----|   CLient App   |----+ (1) access_token
+              |    |                |    |
+              |    +----------------+    | POST
+              |                          | /oauth/token
+              V                          V
+   +----------------+              +-----------------+
+   |                |              |                 |
+   |    Resource    |              |  Authorization  |
+   |     Server     |------------->|     Server      |
+   |                |      (3)     |                 |
+   +----------------+              +-----------------+
+                      POST
+                      /oauth/check_token
+
+  (1) web-client-app needs obtain access_token from auth-server
+      by using POST /oauth/token request
+  (2) web-client-app using header:
+      'Authorization: Bearer $access_token' can request any
+      secured data from resource-server
+  (3) resource-server will verify client access_token by using
+      POST /oauth/check_token request to auth-server
+
+  NOTE: Authorization server could be a bottleneck, so think
+        about it's stability and reliability...
+
+----
+
+== Implementations
+
+include::../../apps/auth-server/README.adoc[]
+include::../../apps/resource-server/README.adoc[]
+include::../../apps/web-client-app/README.adoc[]

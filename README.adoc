@@ -1,0 +1,28 @@
+= oauth2-jdbc-example image:https://travis-ci.org/daggerok/oauth2-jdbc-example.svg?branch=master["Build Status", link="https://travis-ci.org/daggerok/oauth2-jdbc-example"]
+
+//tag::content[]
+For some reason, big part of software developers community do not care about security
+I think main reason is because security hard topic. And it's really sad.
+
+Main goal of that project is learn spring-security oauth2 (JDBC)
+Because any enterprise application can't go live without security, I believe it should be done first!
+You must avoid situation when big part of application architecture later may be rewritten to apply security...
+//end::content[]
+
+Checkout link:https://daggerok.github.io/security-first[project reference] :)
+
+.build and run in docker
+[source,bash]
+----
+docker-compose run -v ~/.m2:/root/.m2 -v ~/.gradle:/root/.gradle build
+docker-compose run all
+docker-compose logs -f -t
+----
+
+open http://127.0.0.1:8003 and use clientId / secret
+
+.build and run in docker
+[source,bash]
+----
+docker-compose stop
+----

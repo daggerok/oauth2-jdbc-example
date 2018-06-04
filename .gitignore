@@ -1,0 +1,18 @@
+### App ###
+*.*.db
+
+### Gradle / Maven ###
+.gradle/
+/build/
+**/build/
+/out/
+**/out/
+
+### IntelliJ IDEA ###
+.idea/
+*.iws
+*.iml
+*.ipr
+*.log*
+
+.DS_Store

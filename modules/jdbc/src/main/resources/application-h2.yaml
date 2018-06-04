@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:h2:file:./oauth2-jdbc-example;AUTO_SERVER=TRUE;MULTI_THREADED=TRUE;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: oauth2-jdbc-example
+    password: oauth2-jdbc-example
+    driver-class-name: org.h2.Driver
+    hikari.connection-test-query: 'SELECT 1;'
+  h2.console.enabled: true
+logging.level.org.springframework.jdbc: 'DEBUG'

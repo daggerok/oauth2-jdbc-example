@@ -1,0 +1,14 @@
+import org.springframework.boot.gradle.plugin.SpringBootPlugin
+
+subprojects { sp ->
+  apply from: "$rootDir/gradle/spring-boot.gradle"
+
+  plugins.withType(SpringBootPlugin) {
+    bootJar {
+      enabled = false
+    }
+    jar {
+      enabled = true
+    }
+  }
+}

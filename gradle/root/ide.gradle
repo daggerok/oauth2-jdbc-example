@@ -1,0 +1,9 @@
+apply plugin: "idea"
+subprojects*.apply plugin: "cn.bestwu.propdeps-idea"
+
+idea {
+  module {
+    downloadJavadoc = false
+    downloadSources = true
+  }
+}
