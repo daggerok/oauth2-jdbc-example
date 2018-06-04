@@ -814,11 +814,19 @@ seen and used in java.</p>
 <div id="application-h2.yaml" class="listingblock">
 <div class="title">application-h2.yaml</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="error">Unresolved directive in -server/README.adoc - include::./src/main/resources/application-h2.yaml[]</span></code></pre>
+<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">spring</span>:
+  <span class="key">datasource</span>:
+    <span class="key">url</span>: <span class="string"><span class="content">jdbc:h2:file:./oauth2-jdbc-example;AUTO_SERVER=TRUE;MULTI_THREADED=TRUE;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE</span></span>
+    <span class="key">username</span>: <span class="string"><span class="content">oauth2-jdbc-example</span></span>
+    <span class="key">password</span>: <span class="string"><span class="content">oauth2-jdbc-example</span></span>
+    <span class="key">driver-class-name</span>: <span class="string"><span class="content">org.h2.Driver</span></span>
+    <span class="key">hikari.connection-test-query</span>: <span class="string"><span class="content">'SELECT 1;'</span></span>
+  <span class="key">h2.console.enabled</span>: <span class="string"><span class="content">true</span></span>
+<span class="key">logging.level.org.springframework.jdbc</span>: <span class="string"><span class="content">'DEBUG'</span></span></code></pre>
 </div>
 </div>
 <div id="DataSourceConfig" class="listingblock">
-<div class="title">application-h2.yaml</div>
+<div class="title">DataSourceConfig</div>
 <div class="content">
 <pre class="CodeRay highlight"><code data-lang="java">  <span class="annotation">@Bean</span>
   <span class="directive">public</span> DataSourceInitializer dataSourceInitializer(<span class="directive">final</span> <span class="predefined-type">DataSource</span> dataSource) {
@@ -837,7 +845,77 @@ seen and used in java.</p>
 <div id="schema-h2.sql" class="listingblock">
 <div class="title">schema-h2.sql</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql">Unresolved directive <span class="keyword">in</span> -server/README.adoc - include::./src/main/resources/schema-h2.sql[]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_client_details;
+<span class="class">create</span> <span class="type">table</span> oauth_client_details (
+  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  resource_ids <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  client_secret <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  authorized_grant_types <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  web_server_redirect_uri <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  authorities <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  access_token_validity <span class="predefined-type">INTEGER</span>,
+  refresh_token_validity <span class="predefined-type">INTEGER</span>,
+  additional_information <span class="predefined-type">VARCHAR</span>(<span class="integer">4096</span>),
+  autoapprove <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_client_token;
+<span class="class">create</span> <span class="type">table</span> oauth_client_token (
+  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  token LONGVARBINARY,
+  authentication_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  user_name <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_access_token;
+<span class="class">create</span> <span class="type">table</span> oauth_access_token (
+  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  token LONGVARBINARY,
+  authentication_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  user_name <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  authentication LONGVARBINARY,
+  refresh_token <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_refresh_token;
+<span class="class">create</span> <span class="type">table</span> oauth_refresh_token (
+  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  token LONGVARBINARY,
+  authentication LONGVARBINARY
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_code;
+<span class="class">create</span> <span class="type">table</span> oauth_code (
+  code <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>), authentication LONGVARBINARY
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_approvals;
+<span class="class">create</span> <span class="type">table</span> oauth_approvals (
+    userId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+    clientId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+    scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+    status <span class="predefined-type">VARCHAR</span>(<span class="integer">10</span>),
+    expiresAt <span class="predefined-type">TIMESTAMP</span>,
+    lastModifiedAt <span class="predefined-type">TIMESTAMP</span>
+);
+
+<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> ClientDetails;
+<span class="class">create</span> <span class="type">table</span> ClientDetails (
+  appId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
+  resourceIds <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  appSecret <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  grantTypes <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  redirectUrl <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  authorities <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  access_token_validity <span class="predefined-type">INTEGER</span>,
+  refresh_token_validity <span class="predefined-type">INTEGER</span>,
+  additionalInformation <span class="predefined-type">VARCHAR</span>(<span class="integer">4096</span>),
+  autoApproveScopes <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+);</code></pre>
 </div>
 </div>
 </div>
@@ -846,7 +924,29 @@ seen and used in java.</p>
 <div id="JdbcUserDetailsService" class="listingblock">
 <div class="title">JdbcUserDetailsService</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in -server/README.adoc - include::./src/main/java/com/github/daggerok/oauth2authserver/JdbcOauth2AuthServer.java[tags=jdbc-user-details-service]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Service</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">JdbcUserDetailsService</span> <span class="directive">implements</span> UserDetailsService {
+
+  <span class="directive">final</span> PasswordEncoder encoder;
+  <span class="directive">final</span> JdbcTemplate jdbcTemplate;
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> UserDetails loadUserByUsername(<span class="predefined-type">String</span> username) <span class="directive">throws</span> UsernameNotFoundException {
+    <span class="comment">//@formatter:off</span>
+    <span class="keyword">return</span> User
+        .withUsername(<span class="string"><span class="delimiter">&quot;</span><span class="content">usr</span><span class="delimiter">&quot;</span></span>)
+        <span class="comment">//.password(&quot;pwd&quot;)</span>
+        .password(<span class="predefined-constant">null</span> == encoder ? <span class="string"><span class="delimiter">&quot;</span><span class="content">{noop}pwd</span><span class="delimiter">&quot;</span></span> : encoder.encode(<span class="string"><span class="delimiter">&quot;</span><span class="content">pwd</span><span class="delimiter">&quot;</span></span>))
+        .disabled(<span class="predefined-constant">false</span>)
+        .accountExpired(<span class="predefined-constant">false</span>)
+        .accountLocked(<span class="predefined-constant">false</span>)
+        .credentialsExpired(<span class="predefined-constant">false</span>)
+        .authorities(<span class="string"><span class="delimiter">&quot;</span><span class="content">USER</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ADMIN</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_USER</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_ADMIN</span><span class="delimiter">&quot;</span></span>)
+        .build();
+    <span class="comment">//@formatter:on</span>
+  }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -855,7 +955,24 @@ seen and used in java.</p>
 <div id="AuthenticationManagerConfig" class="listingblock">
 <div class="title">AuthenticationManagerConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in -server/README.adoc - include::./src/main/java/com/github/daggerok/oauth2authserver/JdbcOauth2AuthServer.java[tags=authentication-manager-config]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@ComponentScan</span>(basePackageClasses = JdbcUserDetailsService.class)
+<span class="directive">public</span> <span class="type">class</span> <span class="class">AuthenticationManagerConfig</span> <span class="directive">extends</span> WebSecurityConfigurerAdapter {
+
+  <span class="directive">final</span> JdbcUserDetailsService userDetailsService;
+
+  <span class="annotation">@Override</span>
+  <span class="directive">protected</span> <span class="type">void</span> configure(AuthenticationManagerBuilder auth) <span class="directive">throws</span> <span class="exception">Exception</span> {
+    auth.userDetailsService(userDetailsService);
+  }
+
+  <span class="annotation">@Bean</span>
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> AuthenticationManager authenticationManagerBean() <span class="directive">throws</span> <span class="exception">Exception</span> {
+    <span class="keyword">return</span> <span class="local-variable">super</span>.authenticationManagerBean();
+  }
+}</code></pre>
 </div>
 </div>
 </div>
@@ -864,7 +981,70 @@ seen and used in java.</p>
 <div id="JdbcOauth2AuthServerConfig" class="listingblock">
 <div class="title">JdbcOauth2AuthServerConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">Unresolved directive in -server/README.adoc - include::./src/main/java/com/github/daggerok/oauth2authserver/JdbcOauth2AuthServer.java[tags=jdbc-oauth2-auth-server-config]</code></pre>
+<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+ * CORS Filter.
+ *
+ * https://github.com/spring-projects/spring-security-oauth/issues/938#issuecomment-286243307
+ * @Orger(2)
+ * +
+ * @Bean FilterRegistrationBean corsFilter() { ... }
+ */</span>
+<span class="annotation">@Order</span>(<span class="integer">2</span>)
+<span class="annotation">@Configuration</span>
+<span class="annotation">@RequiredArgsConstructor</span>
+<span class="annotation">@EnableAuthorizationServer</span>
+<span class="annotation">@Import</span>(FilterRegistrationBeanConfig.class) <span class="comment">// re-use CORS filter module</span>
+<span class="directive">public</span> <span class="type">class</span> <span class="class">JdbcOauth2AuthServerConfig</span> <span class="directive">extends</span> AuthorizationServerConfigurerAdapter {
+
+  <span class="directive">final</span> <span class="predefined-type">DataSource</span> dataSource;
+  <span class="directive">final</span> PasswordEncoder encoder;
+  <span class="directive">final</span> ClientsProps clientsProps;
+  <span class="directive">final</span> AuthenticationManager authenticationManager;
+
+  <span class="annotation">@Bean</span>
+  <span class="directive">public</span> TokenStore tokenStore() {
+    <span class="keyword">return</span> <span class="keyword">new</span> JdbcTokenStore(dataSource);
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> configure(<span class="directive">final</span> ClientDetailsServiceConfigurer clients) <span class="directive">throws</span> <span class="exception">Exception</span> {
+
+    <span class="directive">final</span> ClientsProps.Client resourceAppClient = clientsProps.getResourceAppClient();
+    <span class="directive">final</span> ClientsProps.Client passwordClient = clientsProps.getPasswordClient();
+
+    <span class="comment">//@formatter:off</span>
+    clients
+        .jdbc(dataSource)
+          .withClient(resourceAppClient.getClientId())
+          .authorizedGrantTypes(resourceAppClient.getAuthorizedGrantTypes())
+          .secret(resourceAppClient.generateSecret(encoder))
+          .scopes(resourceAppClient.getScopes())
+          .autoApprove(resourceAppClient.isAutoApprove())
+          .and()
+        .withClient(passwordClient.getClientId())
+          .authorizedGrantTypes(passwordClient.getAuthorizedGrantTypes())
+          .secret(passwordClient.generateSecret(encoder))
+          .scopes(passwordClient.getScopes())
+          .autoApprove(passwordClient.isAutoApprove())
+    <span class="comment">//@formatter:on</span>
+    ;
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> configure(AuthorizationServerEndpointsConfigurer endpoints) <span class="directive">throws</span> <span class="exception">Exception</span> {
+    endpoints
+        .tokenStore(tokenStore())
+        .authenticationManager(authenticationManager)
+    ;
+  }
+
+  <span class="annotation">@Override</span>
+  <span class="directive">public</span> <span class="type">void</span> configure(AuthorizationServerSecurityConfigurer oauthServer) {
+    oauthServer
+        .tokenKeyAccess(<span class="string"><span class="delimiter">&quot;</span><span class="content">permitAll()</span><span class="delimiter">&quot;</span></span>)
+        .checkTokenAccess(<span class="string"><span class="delimiter">&quot;</span><span class="content">isAuthenticated()</span><span class="delimiter">&quot;</span></span>);
+  }
+}</code></pre>
 </div>
 </div>
 </div>
