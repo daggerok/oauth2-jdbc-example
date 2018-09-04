@@ -1,11 +1,11 @@
 buildscript {
   ext {
-    appVersion = '0.0.1'
+    appVersion = '0.0.2'
     appGroup = 'com.github.daggerok'
 
+    springBootVersion = '2.0.4.RELEASE'
+    springCloudVersion = 'Finchley.RELEASE'
     javaVersion = JavaVersion.VERSION_1_8
-    springBootVersion = '2.0.2.RELEASE'
-    springCloudVersion = 'Finchley.RC1'
     oauth2Version = '2.3.3.RELEASE'
     jacksonKotlinVersion = '2.9.5'
     jwtVersion = '1.0.9.RELEASE'
@@ -34,8 +34,6 @@ buildscript {
     classpath("org.asciidoctor:asciidoctorj-pdf:$asciidoctorjPdfVersion")
   }
 
-  //// spring-boot versions overriding, be careful with it!
-  // In our case we are fixing PhantomJS (replacing older spring-boot version):
   ext['selenium.version'] = '3.12.0'
 }
 
@@ -53,8 +51,8 @@ plugins {
   id 'cn.bestwu.propdeps' version '0.0.10' apply false
 }
 
-task wrapper(type: Wrapper) {
-  gradleVersion = '4.7'
+wrapper {
+  gradleVersion = '4.10'
   distributionType = 'BIN'
 }
 

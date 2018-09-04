@@ -21,6 +21,14 @@ docker-compose run all; docker-compose logs -f -t
 
 open http://127.0.0.1:8003 and use clientId / secret
 
+h2 database cosnole:
+
+- visit: http://0.0.0.0:8001/h2-console/ (first use proper http basic auth if required: pwd / usr)
+- use next h2 console settings to connect to database:
+  .. jdbc url: jdbc:h2:file:./oauth2-jdbc-example
+  .. username: oauth2-jdbc-example
+  .. password: oauth2-jdbc-example
+
 .build and run in docker
 [source,bash]
 ----

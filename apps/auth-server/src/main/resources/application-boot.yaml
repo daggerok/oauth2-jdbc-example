@@ -2,3 +2,9 @@ server.port: 8001
 spring:
   application.name: jdbc-oauth2-auth-server
   output.ansi.enabled: always
+  h2:
+    console:
+      path: /h2-console
+      enabled: true
+      settings:
+        web-allow-others: true

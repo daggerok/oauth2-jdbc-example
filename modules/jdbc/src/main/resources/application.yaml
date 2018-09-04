@@ -1,5 +1,1 @@
-spring:
-  profiles:
-    include:
-    - boot
-    - h2
+spring.output.ansi.enabled: always
