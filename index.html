@@ -6,7 +6,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="generator" content="Asciidoctor 1.5.5">
 <meta name="author" content="Maksim Kostromin">
-<title>OAuth2 JDBC docs (0.0.1)</title>
+<title>oauth2-jdbc-example (0.0.2)</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:300,300italic,400,400italic,600,600italic%7CNoto+Serif:400,400italic,700,700italic%7CDroid+Sans+Mono:400,700">
 <style>
 /* Asciidoctor default stylesheet | MIT License | http://asciidoctor.org */
@@ -420,97 +420,6 @@ body.book #toc,body.book #preamble,body.book h1.sect0,body.book .sect1>h2{page-b
 </style>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css">
 <style>
-/* Stylesheet for CodeRay to match GitHub theme | MIT License | http://foundation.zurb.com */
-/*pre.CodeRay {background-color:#f7f7f8;}*/
-.CodeRay .line-numbers{border-right:1px solid #d8d8d8;padding:0 0.5em 0 .25em}
-.CodeRay span.line-numbers{display:inline-block;margin-right:.5em;color:rgba(0,0,0,.3)}
-.CodeRay .line-numbers strong{color:rgba(0,0,0,.4)}
-table.CodeRay{border-collapse:separate;border-spacing:0;margin-bottom:0;border:0;background:none}
-table.CodeRay td{vertical-align: top;line-height:1.45}
-table.CodeRay td.line-numbers{text-align:right}
-table.CodeRay td.line-numbers>pre{padding:0;color:rgba(0,0,0,.3)}
-table.CodeRay td.code{padding:0 0 0 .5em}
-table.CodeRay td.code>pre{padding:0}
-.CodeRay .debug{color:#fff !important;background:#000080 !important}
-.CodeRay .annotation{color:#007}
-.CodeRay .attribute-name{color:#000080}
-.CodeRay .attribute-value{color:#700}
-.CodeRay .binary{color:#509}
-.CodeRay .comment{color:#998;font-style:italic}
-.CodeRay .char{color:#04d}
-.CodeRay .char .content{color:#04d}
-.CodeRay .char .delimiter{color:#039}
-.CodeRay .class{color:#458;font-weight:bold}
-.CodeRay .complex{color:#a08}
-.CodeRay .constant,.CodeRay .predefined-constant{color:#008080}
-.CodeRay .color{color:#099}
-.CodeRay .class-variable{color:#369}
-.CodeRay .decorator{color:#b0b}
-.CodeRay .definition{color:#099}
-.CodeRay .delimiter{color:#000}
-.CodeRay .doc{color:#970}
-.CodeRay .doctype{color:#34b}
-.CodeRay .doc-string{color:#d42}
-.CodeRay .escape{color:#666}
-.CodeRay .entity{color:#800}
-.CodeRay .error{color:#808}
-.CodeRay .exception{color:inherit}
-.CodeRay .filename{color:#099}
-.CodeRay .function{color:#900;font-weight:bold}
-.CodeRay .global-variable{color:#008080}
-.CodeRay .hex{color:#058}
-.CodeRay .integer,.CodeRay .float{color:#099}
-.CodeRay .include{color:#555}
-.CodeRay .inline{color:#000}
-.CodeRay .inline .inline{background:#ccc}
-.CodeRay .inline .inline .inline{background:#bbb}
-.CodeRay .inline .inline-delimiter{color:#d14}
-.CodeRay .inline-delimiter{color:#d14}
-.CodeRay .important{color:#555;font-weight:bold}
-.CodeRay .interpreted{color:#b2b}
-.CodeRay .instance-variable{color:#008080}
-.CodeRay .label{color:#970}
-.CodeRay .local-variable{color:#963}
-.CodeRay .octal{color:#40e}
-.CodeRay .predefined{color:#369}
-.CodeRay .preprocessor{color:#579}
-.CodeRay .pseudo-class{color:#555}
-.CodeRay .directive{font-weight:bold}
-.CodeRay .type{font-weight:bold}
-.CodeRay .predefined-type{color:inherit}
-.CodeRay .reserved,.CodeRay .keyword {color:#000;font-weight:bold}
-.CodeRay .key{color:#808}
-.CodeRay .key .delimiter{color:#606}
-.CodeRay .key .char{color:#80f}
-.CodeRay .value{color:#088}
-.CodeRay .regexp .delimiter{color:#808}
-.CodeRay .regexp .content{color:#808}
-.CodeRay .regexp .modifier{color:#808}
-.CodeRay .regexp .char{color:#d14}
-.CodeRay .regexp .function{color:#404;font-weight:bold}
-.CodeRay .string{color:#d20}
-.CodeRay .string .string .string{background:#ffd0d0}
-.CodeRay .string .content{color:#d14}
-.CodeRay .string .char{color:#d14}
-.CodeRay .string .delimiter{color:#d14}
-.CodeRay .shell{color:#d14}
-.CodeRay .shell .delimiter{color:#d14}
-.CodeRay .symbol{color:#990073}
-.CodeRay .symbol .content{color:#a60}
-.CodeRay .symbol .delimiter{color:#630}
-.CodeRay .tag{color:#008080}
-.CodeRay .tag-special{color:#d70}
-.CodeRay .variable{color:#036}
-.CodeRay .insert{background:#afa}
-.CodeRay .delete{background:#faa}
-.CodeRay .change{color:#aaf;background:#007}
-.CodeRay .head{color:#f8f;background:#505}
-.CodeRay .insert .insert{color:#080}
-.CodeRay .delete .delete{color:#800}
-.CodeRay .change .change{color:#66f}
-.CodeRay .head .head{color:#f4f}
-</style>
-<style>
   /*
   @media screen and (min-width: 4096px) {
     body {
@@ -580,8 +489,6 @@ table.CodeRay td.code>pre{padding:0}
 <meta name="description"
       content="Security, security-first, spring, spring-boot, spring-security, spring-boot security, gradle, kotlin, asciidoc, adoc, documentation.">
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
 <!-- see https://codepo8.github.io/css-fork-on-github-ribbon/ -->
 <link rel="shortcut icon" type="image/x-icon" href="images/favicon.ico">
 <div>
@@ -597,15 +504,17 @@ table.CodeRay td.code>pre{padding:0}
     max-width: 95%;
   }
 </style>
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
 </head>
 <body class="book toc2 toc-left">
 <div id="header">
-<h1>OAuth2 JDBC docs (0.0.1)</h1>
+<h1>oauth2-jdbc-example (0.0.2) <span class="image"><a class="image" href="https://github.com/daggerok/oauth2-jdbc-example"><img src="https://travis-ci.org/daggerok/oauth2-jdbc-example.svg?branch=master" alt="Build Status"></a></span></h1>
 <div class="details">
 <span id="author" class="author">Maksim Kostromin</span><br>
 <span id="email" class="email"><a href="mailto:daggerok@gmail.com">daggerok@gmail.com</a></span><br>
-<span id="revnumber">version 0.0.1,</span>
-<span id="revdate">2018-06-04 05:40:38 EEST</span>
+<span id="revnumber">version 0.0.2,</span>
+<span id="revdate">2018-09-04 14:23:38 UTC</span>
 </div>
 <div id="toc" class="toc2">
 <div id="toctitle">Table of Contents</div>
@@ -640,10 +549,6 @@ table.CodeRay td.code>pre{padding:0}
 <div id="preamble">
 <div class="sectionbody">
 <div class="paragraph">
-<p>Travis CI status:
-<span class="image"><a class="image" href="https://github.com/daggerok/oauth2-jdbc-example"><img src="https://travis-ci.org/daggerok/oauth2-jdbc-example.svg?branch=master" alt="Build Status"></a></span></p>
-</div>
-<div class="paragraph">
 <p><a href="./index.pdf">Documentation in PFD format</a></p>
 </div>
 </div>
@@ -675,7 +580,7 @@ seen and used in java.</p>
 <div class="sectionbody">
 <div class="listingblock">
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">    Authorization    +----------------+
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">    Authorization    +----------------+
     Bearer           |                |
     Header  (2) +----|   CLient App   |----+ (1) access_token
                 |    |                |    |
@@ -716,13 +621,13 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">build, run</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">./gradlew clean :apps:jd-o-a-s:bootRun</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">./gradlew clean :apps:jd-o-a-s:bootRun</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">obtain token</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http -a clientId:secret \
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">http -a clientId:secret \
      --form post :8001/oauth/token \
      grant_type=password \
      username=usr \
@@ -734,19 +639,19 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">access_token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">aa3d78ea-ac9a-4a37-9b8c-3d31b6abfe15</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">expires_in</span><span class="delimiter">&quot;</span></span>: <span class="integer">43199</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">refresh_token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">09ae7996-719f-4e24-9389-469f90761853</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">scope</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">read</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">token_type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">bearer</span><span class="delimiter">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+    "access_token": "aa3d78ea-ac9a-4a37-9b8c-3d31b6abfe15",
+    "expires_in": 43199,
+    "refresh_token": "09ae7996-719f-4e24-9389-469f90761853",
+    "scope": "read",
+    "token_type": "bearer"
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">check token</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http -a clientId:secret \
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">http -a clientId:secret \
      --form post :8001/oauth/check_token \
      grant_type=implicit \
      token=aa3d78ea-ac9a-4a37-9b8c-3d31b6abfe15
@@ -757,20 +662,20 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">output</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">active</span><span class="delimiter">&quot;</span></span>: <span class="value">true</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">authorities</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_ADMIN</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">ADMIN</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">USER</span><span class="delimiter">&quot;</span></span>,
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_USER</span><span class="delimiter">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+    "active": true,
+    "authorities": [
+        "ROLE_ADMIN",
+        "ADMIN",
+        "USER",
+        "ROLE_USER"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">client_id</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">passwordClientId</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">exp</span><span class="delimiter">&quot;</span></span>: <span class="integer">1528017060</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">scope</span><span class="delimiter">&quot;</span></span>: [
-        <span class="string"><span class="delimiter">&quot;</span><span class="content">read</span><span class="delimiter">&quot;</span></span>
+    "client_id": "passwordClientId",
+    "exp": 1528017060,
+    "scope": [
+        "read"
     ],
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">user_name</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">usr</span><span class="delimiter">&quot;</span></span>
+    "user_name": "usr"
 }</code></pre>
 </div>
 </div>
@@ -814,107 +719,107 @@ seen and used in java.</p>
 <div id="application-h2.yaml" class="listingblock">
 <div class="title">application-h2.yaml</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="yaml"><span class="key">spring</span>:
-  <span class="key">datasource</span>:
-    <span class="key">url</span>: <span class="string"><span class="content">jdbc:h2:file:./oauth2-jdbc-example;AUTO_SERVER=TRUE;MULTI_THREADED=TRUE;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE</span></span>
-    <span class="key">username</span>: <span class="string"><span class="content">oauth2-jdbc-example</span></span>
-    <span class="key">password</span>: <span class="string"><span class="content">oauth2-jdbc-example</span></span>
-    <span class="key">driver-class-name</span>: <span class="string"><span class="content">org.h2.Driver</span></span>
-    <span class="key">hikari.connection-test-query</span>: <span class="string"><span class="content">'SELECT 1;'</span></span>
-  <span class="key">h2.console.enabled</span>: <span class="string"><span class="content">true</span></span>
-<span class="key">logging.level.org.springframework.jdbc</span>: <span class="string"><span class="content">'DEBUG'</span></span></code></pre>
+<pre class="highlightjs highlight"><code class="language-yaml" data-lang="yaml">spring:
+  datasource:
+    url: jdbc:h2:file:./oauth2-jdbc-example;AUTO_SERVER=TRUE;MULTI_THREADED=TRUE;MODE=MYSQL;DB_CLOSE_ON_EXIT=FALSE;AUTO_RECONNECT=TRUE
+    username: oauth2-jdbc-example
+    password: oauth2-jdbc-example
+    driver-class-name: org.h2.Driver
+    hikari.connection-test-query: 'SELECT 1;'
+  h2.console.enabled: true
+logging.level.org.springframework.jdbc: 'DEBUG'</code></pre>
 </div>
 </div>
 <div id="DataSourceConfig" class="listingblock">
 <div class="title">DataSourceConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">  <span class="annotation">@Bean</span>
-  <span class="directive">public</span> DataSourceInitializer dataSourceInitializer(<span class="directive">final</span> <span class="predefined-type">DataSource</span> dataSource) {
-    <span class="directive">final</span> DataSourceInitializer initializer = <span class="keyword">new</span> DataSourceInitializer();
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">  @Bean
+  public DataSourceInitializer dataSourceInitializer(final DataSource dataSource) {
+    final DataSourceInitializer initializer = new DataSourceInitializer();
     initializer.setDataSource(dataSource);
     initializer.setDatabasePopulator(databasePopulator());
-    <span class="keyword">return</span> initializer;
+    return initializer;
   }
 
-  <span class="directive">private</span> DatabasePopulator databasePopulator() {
-    <span class="directive">final</span> ClassPathResource schema = <span class="keyword">new</span> ClassPathResource(<span class="string"><span class="delimiter">&quot;</span><span class="content">/schema-h2.sql</span><span class="delimiter">&quot;</span></span>, DataSourceConfig.class.getClassLoader());
-    <span class="keyword">return</span> <span class="keyword">new</span> ResourceDatabasePopulator(<span class="predefined-constant">false</span>, <span class="predefined-constant">true</span>, UTF_8.displayName(), schema);
+  private DatabasePopulator databasePopulator() {
+    final ClassPathResource schema = new ClassPathResource("/schema-h2.sql", DataSourceConfig.class.getClassLoader());
+    return new ResourceDatabasePopulator(false, true, UTF_8.displayName(), schema);
   }</code></pre>
 </div>
 </div>
 <div id="schema-h2.sql" class="listingblock">
 <div class="title">schema-h2.sql</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="sql"><span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_client_details;
-<span class="class">create</span> <span class="type">table</span> oauth_client_details (
-  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
-  resource_ids <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  client_secret <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  authorized_grant_types <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  web_server_redirect_uri <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  authorities <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  access_token_validity <span class="predefined-type">INTEGER</span>,
-  refresh_token_validity <span class="predefined-type">INTEGER</span>,
-  additional_information <span class="predefined-type">VARCHAR</span>(<span class="integer">4096</span>),
-  autoapprove <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+<pre class="highlightjs highlight"><code class="language-sql" data-lang="sql">drop table if exists oauth_client_details;
+create table oauth_client_details (
+  client_id VARCHAR(255) PRIMARY KEY,
+  resource_ids VARCHAR(255),
+  client_secret VARCHAR(255),
+  scope VARCHAR(255),
+  authorized_grant_types VARCHAR(255),
+  web_server_redirect_uri VARCHAR(255),
+  authorities VARCHAR(255),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additional_information VARCHAR(4096),
+  autoapprove VARCHAR(255)
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_client_token;
-<span class="class">create</span> <span class="type">table</span> oauth_client_token (
-  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+drop table if exists oauth_client_token;
+create table oauth_client_token (
+  token_id VARCHAR(255),
   token LONGVARBINARY,
-  authentication_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
-  user_name <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+  authentication_id VARCHAR(255) PRIMARY KEY,
+  user_name VARCHAR(255),
+  client_id VARCHAR(255)
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_access_token;
-<span class="class">create</span> <span class="type">table</span> oauth_access_token (
-  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+drop table if exists oauth_access_token;
+create table oauth_access_token (
+  token_id VARCHAR(255),
   token LONGVARBINARY,
-  authentication_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
-  user_name <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  client_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+  authentication_id VARCHAR(255) PRIMARY KEY,
+  user_name VARCHAR(255),
+  client_id VARCHAR(255),
   authentication LONGVARBINARY,
-  refresh_token <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+  refresh_token VARCHAR(255)
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_refresh_token;
-<span class="class">create</span> <span class="type">table</span> oauth_refresh_token (
-  token_id <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
+drop table if exists oauth_refresh_token;
+create table oauth_refresh_token (
+  token_id VARCHAR(255),
   token LONGVARBINARY,
   authentication LONGVARBINARY
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_code;
-<span class="class">create</span> <span class="type">table</span> oauth_code (
-  code <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>), authentication LONGVARBINARY
+drop table if exists oauth_code;
+create table oauth_code (
+  code VARCHAR(255), authentication LONGVARBINARY
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> oauth_approvals;
-<span class="class">create</span> <span class="type">table</span> oauth_approvals (
-    userId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-    clientId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-    scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-    status <span class="predefined-type">VARCHAR</span>(<span class="integer">10</span>),
-    expiresAt <span class="predefined-type">TIMESTAMP</span>,
-    lastModifiedAt <span class="predefined-type">TIMESTAMP</span>
+drop table if exists oauth_approvals;
+create table oauth_approvals (
+    userId VARCHAR(255),
+    clientId VARCHAR(255),
+    scope VARCHAR(255),
+    status VARCHAR(10),
+    expiresAt TIMESTAMP,
+    lastModifiedAt TIMESTAMP
 );
 
-<span class="class">drop</span> <span class="type">table</span> <span class="keyword">if</span> <span class="keyword">exists</span> ClientDetails;
-<span class="class">create</span> <span class="type">table</span> ClientDetails (
-  appId <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>) <span class="directive">PRIMARY</span> <span class="type">KEY</span>,
-  resourceIds <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  appSecret <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  scope <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  grantTypes <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  redirectUrl <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  authorities <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>),
-  access_token_validity <span class="predefined-type">INTEGER</span>,
-  refresh_token_validity <span class="predefined-type">INTEGER</span>,
-  additionalInformation <span class="predefined-type">VARCHAR</span>(<span class="integer">4096</span>),
-  autoApproveScopes <span class="predefined-type">VARCHAR</span>(<span class="integer">255</span>)
+drop table if exists ClientDetails;
+create table ClientDetails (
+  appId VARCHAR(255) PRIMARY KEY,
+  resourceIds VARCHAR(255),
+  appSecret VARCHAR(255),
+  scope VARCHAR(255),
+  grantTypes VARCHAR(255),
+  redirectUrl VARCHAR(255),
+  authorities VARCHAR(255),
+  access_token_validity INTEGER,
+  refresh_token_validity INTEGER,
+  additionalInformation VARCHAR(4096),
+  autoApproveScopes VARCHAR(255)
 );</code></pre>
 </div>
 </div>
@@ -924,27 +829,43 @@ seen and used in java.</p>
 <div id="JdbcUserDetailsService" class="listingblock">
 <div class="title">JdbcUserDetailsService</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Service</span>
-<span class="annotation">@RequiredArgsConstructor</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">JdbcUserDetailsService</span> <span class="directive">implements</span> UserDetailsService {
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">@Service
+@RequiredArgsConstructor
+public class JdbcUserDetailsService implements UserDetailsService {
 
-  <span class="directive">final</span> PasswordEncoder encoder;
-  <span class="directive">final</span> JdbcTemplate jdbcTemplate;
+  // in memory applications credentials database configuration:
+  private static final Map&lt;String, String&gt; db = HashMap.of(
+      "usr", "pwd"
+  ).toJavaMap();
 
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> UserDetails loadUserByUsername(<span class="predefined-type">String</span> username) <span class="directive">throws</span> UsernameNotFoundException {
-    <span class="comment">//@formatter:off</span>
-    <span class="keyword">return</span> User
-        .withUsername(<span class="string"><span class="delimiter">&quot;</span><span class="content">usr</span><span class="delimiter">&quot;</span></span>)
-        <span class="comment">//.password(&quot;pwd&quot;)</span>
-        .password(<span class="predefined-constant">null</span> == encoder ? <span class="string"><span class="delimiter">&quot;</span><span class="content">{noop}pwd</span><span class="delimiter">&quot;</span></span> : encoder.encode(<span class="string"><span class="delimiter">&quot;</span><span class="content">pwd</span><span class="delimiter">&quot;</span></span>))
-        .disabled(<span class="predefined-constant">false</span>)
-        .accountExpired(<span class="predefined-constant">false</span>)
-        .accountLocked(<span class="predefined-constant">false</span>)
-        .credentialsExpired(<span class="predefined-constant">false</span>)
-        .authorities(<span class="string"><span class="delimiter">&quot;</span><span class="content">USER</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ADMIN</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_USER</span><span class="delimiter">&quot;</span></span>, <span class="string"><span class="delimiter">&quot;</span><span class="content">ROLE_ADMIN</span><span class="delimiter">&quot;</span></span>)
+  final PasswordEncoder encoder;
+  final JdbcTemplate jdbcTemplate;
+
+  @PostConstruct
+  public void init() {
+    db.forEach(this::mapToUser);
+  }
+
+  private UserDetails mapToUser(final String username, final String password) {
+    return User
+        .withUsername(username)
+        .password(null == encoder ? format("{noop}%s", password) : encoder.encode(password))
+        .disabled(false)
+        .accountExpired(false)
+        .accountLocked(false)
+        .credentialsExpired(false)
+        .authorities("USER", "ADMIN", "ROLE_USER", "ROLE_ADMIN")
         .build();
-    <span class="comment">//@formatter:on</span>
+  }
+
+  @Override
+  public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    final Map.Entry&lt;String, String&gt; pair = db.entrySet()
+                                             .parallelStream()
+                                             .filter(e -&gt; e.getKey().equals(username))
+                                             .findFirst()
+                                             .orElseThrow(() -&gt; new UsernameNotFoundException(username));
+    return mapToUser(pair.getKey(), pair.getValue());
   }
 }</code></pre>
 </div>
@@ -955,22 +876,46 @@ seen and used in java.</p>
 <div id="AuthenticationManagerConfig" class="listingblock">
 <div class="title">AuthenticationManagerConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="annotation">@Configuration</span>
-<span class="annotation">@RequiredArgsConstructor</span>
-<span class="annotation">@ComponentScan</span>(basePackageClasses = JdbcUserDetailsService.class)
-<span class="directive">public</span> <span class="type">class</span> <span class="class">AuthenticationManagerConfig</span> <span class="directive">extends</span> WebSecurityConfigurerAdapter {
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">@Configuration
+@RequiredArgsConstructor
+@ComponentScan(basePackageClasses = JdbcUserDetailsService.class)
+public class AuthenticationManagerConfig extends WebSecurityConfigurerAdapter {
 
-  <span class="directive">final</span> JdbcUserDetailsService userDetailsService;
+  final JdbcUserDetailsService userDetailsService;
 
-  <span class="annotation">@Override</span>
-  <span class="directive">protected</span> <span class="type">void</span> configure(AuthenticationManagerBuilder auth) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  @Override
+  protected void configure(AuthenticationManagerBuilder auth) throws Exception {
     auth.userDetailsService(userDetailsService);
   }
 
-  <span class="annotation">@Bean</span>
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> AuthenticationManager authenticationManagerBean() <span class="directive">throws</span> <span class="exception">Exception</span> {
-    <span class="keyword">return</span> <span class="local-variable">super</span>.authenticationManagerBean();
+  @Bean
+  @Override
+  public AuthenticationManager authenticationManagerBean() throws Exception {
+    return super.authenticationManagerBean();
+  }
+
+  @Override
+  protected void configure(HttpSecurity http) throws Exception {
+    //@formatter:off
+    http
+        .csrf()
+          .disable()
+        .headers()
+          .frameOptions()
+            .sameOrigin()
+            .and()
+        .authorizeRequests()
+          .antMatchers("/login", "/h2-console/**").permitAll()
+        .anyRequest()
+          .fullyAuthenticated()
+        //.and()
+        //  .logout()
+        //    .clearAuthentication(true)
+        //    .invalidateHttpSession(true)
+        //    .deleteCookies("JSESSIONID", "JSESSION", "SESSIONID", "SESSION")
+        //    .permitAll(true)
+    ;
+    //@formatter:on
   }
 }</code></pre>
 </div>
@@ -981,68 +926,68 @@ seen and used in java.</p>
 <div id="JdbcOauth2AuthServerConfig" class="listingblock">
 <div class="title">JdbcOauth2AuthServerConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java"><span class="comment">/**
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">/**
  * CORS Filter.
  *
  * https://github.com/spring-projects/spring-security-oauth/issues/938#issuecomment-286243307
  * @Orger(2)
  * +
  * @Bean FilterRegistrationBean corsFilter() { ... }
- */</span>
-<span class="annotation">@Order</span>(<span class="integer">2</span>)
-<span class="annotation">@Configuration</span>
-<span class="annotation">@RequiredArgsConstructor</span>
-<span class="annotation">@EnableAuthorizationServer</span>
-<span class="annotation">@Import</span>(FilterRegistrationBeanConfig.class) <span class="comment">// re-use CORS filter module</span>
-<span class="directive">public</span> <span class="type">class</span> <span class="class">JdbcOauth2AuthServerConfig</span> <span class="directive">extends</span> AuthorizationServerConfigurerAdapter {
+ */
+@Order(2)
+@Configuration
+@RequiredArgsConstructor
+@EnableAuthorizationServer
+@Import(FilterRegistrationBeanConfig.class) // re-use CORS filter module
+public class JdbcOauth2AuthServerConfig extends AuthorizationServerConfigurerAdapter {
 
-  <span class="directive">final</span> <span class="predefined-type">DataSource</span> dataSource;
-  <span class="directive">final</span> PasswordEncoder encoder;
-  <span class="directive">final</span> ClientsProps clientsProps;
-  <span class="directive">final</span> AuthenticationManager authenticationManager;
+  final DataSource dataSource;
+  final PasswordEncoder encoder;
+  final ClientsProps clientsProps;
+  final AuthenticationManager authenticationManager;
 
-  <span class="annotation">@Bean</span>
-  <span class="directive">public</span> TokenStore tokenStore() {
-    <span class="keyword">return</span> <span class="keyword">new</span> JdbcTokenStore(dataSource);
+  @Bean
+  public TokenStore tokenStore() {
+    return new JdbcTokenStore(dataSource);
   }
 
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> configure(<span class="directive">final</span> ClientDetailsServiceConfigurer clients) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  @Override
+  public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
 
-    <span class="directive">final</span> ClientsProps.Client resourceAppClient = clientsProps.getResourceAppClient();
-    <span class="directive">final</span> ClientsProps.Client passwordClient = clientsProps.getPasswordClient();
+    final ClientsProps.Client resourceAppClient = clientsProps.getResourceAppClient();
+    final ClientsProps.Client passwordClient = clientsProps.getPasswordClient();
 
-    <span class="comment">//@formatter:off</span>
+    //@formatter:off
     clients
         .jdbc(dataSource)
           .withClient(resourceAppClient.getClientId())
-          .authorizedGrantTypes(resourceAppClient.getAuthorizedGrantTypes())
-          .secret(resourceAppClient.generateSecret(encoder))
-          .scopes(resourceAppClient.getScopes())
-          .autoApprove(resourceAppClient.isAutoApprove())
-          .and()
-        .withClient(passwordClient.getClientId())
-          .authorizedGrantTypes(passwordClient.getAuthorizedGrantTypes())
-          .secret(passwordClient.generateSecret(encoder))
-          .scopes(passwordClient.getScopes())
-          .autoApprove(passwordClient.isAutoApprove())
-    <span class="comment">//@formatter:on</span>
+            .authorizedGrantTypes(resourceAppClient.getAuthorizedGrantTypes())
+            .secret(resourceAppClient.generateSecret(encoder))
+            .scopes(resourceAppClient.getScopes())
+            .autoApprove(resourceAppClient.isAutoApprove())
+            .and()
+          .withClient(passwordClient.getClientId())
+            .authorizedGrantTypes(passwordClient.getAuthorizedGrantTypes())
+            .secret(passwordClient.generateSecret(encoder))
+            .scopes(passwordClient.getScopes())
+            .autoApprove(passwordClient.isAutoApprove())
+    //@formatter:on
     ;
   }
 
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> configure(AuthorizationServerEndpointsConfigurer endpoints) <span class="directive">throws</span> <span class="exception">Exception</span> {
+  @Override
+  public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
     endpoints
         .tokenStore(tokenStore())
         .authenticationManager(authenticationManager)
     ;
   }
 
-  <span class="annotation">@Override</span>
-  <span class="directive">public</span> <span class="type">void</span> configure(AuthorizationServerSecurityConfigurer oauthServer) {
+  @Override
+  public void configure(AuthorizationServerSecurityConfigurer oauthServer) {
     oauthServer
-        .tokenKeyAccess(<span class="string"><span class="delimiter">&quot;</span><span class="content">permitAll()</span><span class="delimiter">&quot;</span></span>)
-        .checkTokenAccess(<span class="string"><span class="delimiter">&quot;</span><span class="content">isAuthenticated()</span><span class="delimiter">&quot;</span></span>);
+        .tokenKeyAccess("permitAll()")
+        .checkTokenAccess("isAuthenticated()");
   }
 }</code></pre>
 </div>
@@ -1053,9 +998,9 @@ seen and used in java.</p>
 <div id="PasswordEncoderConfig" class="listingblock">
 <div class="title">PasswordEncoderConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">  <span class="annotation">@Bean</span>
-  <span class="directive">public</span> PasswordEncoder encoder() {
-    <span class="keyword">return</span> PasswordEncoderFactories.createDelegatingPasswordEncoder();
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">  @Bean
+  public PasswordEncoder encoder() {
+    return PasswordEncoderFactories.createDelegatingPasswordEncoder();
   }</code></pre>
 </div>
 </div>
@@ -1089,7 +1034,7 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">build, run and test</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">./gradlew :apps:oauth2-jdbc:resource-server:bootRun</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">./gradlew :apps:oauth2-jdbc:resource-server:bootRun</code></pre>
 </div>
 </div>
 </div>
@@ -1107,20 +1052,20 @@ seen and used in java.</p>
 <div id="RemoteTokenServicesConfig" class="listingblock">
 <div class="title">RemoteTokenServicesConfig</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="java">  <span class="directive">final</span> AppProps appProps;
-  <span class="directive">final</span> ClientsProps clientsProps;
+<pre class="highlightjs highlight"><code class="language-java" data-lang="java">  final AppProps appProps;
+  final ClientsProps clientsProps;
 
-  <span class="annotation">@Bean</span>
-  <span class="annotation">@Primary</span>
-  <span class="directive">public</span> RemoteTokenServices tokenService() {
+  @Bean
+  @Primary
+  public RemoteTokenServices tokenService() {
 
-    <span class="directive">final</span> <span class="predefined-type">String</span> checkTokenEndpointUrl = format(<span class="string"><span class="delimiter">&quot;</span><span class="content">%s/oauth/check_token</span><span class="delimiter">&quot;</span></span>, appProps.getAuthServerUrl());
-    <span class="directive">final</span> RemoteTokenServices tokenService = <span class="keyword">new</span> RemoteTokenServices();
+    final String checkTokenEndpointUrl = format("%s/oauth/check_token", appProps.getAuthServerUrl());
+    final RemoteTokenServices tokenService = new RemoteTokenServices();
     tokenService.setCheckTokenEndpointUrl(checkTokenEndpointUrl);
-    <span class="directive">final</span> ClientsProps.Client client = clientsProps.getResourceAppClient();
+    final ClientsProps.Client client = clientsProps.getResourceAppClient();
     tokenService.setClientId(client.getClientId());
     tokenService.setClientSecret(client.getSecret());
-    <span class="keyword">return</span> tokenService;
+    return tokenService;
   }</code></pre>
 </div>
 </div>
@@ -1134,18 +1079,18 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">first, clint must obtain active token</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http -a clientId:secret --form post :8001/oauth/token grant_type=password username=usr password=pwd</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">http -a clientId:secret --form post :8001/oauth/token grant_type=password username=usr password=pwd</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">response ouptu</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">access_token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">be5caf90-f197-43bf-86e2-cd4560066871</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">expires_in</span><span class="delimiter">&quot;</span></span>: <span class="integer">40917</span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">refresh_token</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">4b2991af-6e1b-40cc-ab83-3f0c135d8c12</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">scope</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">read</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">token_type</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">bearer</span><span class="delimiter">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+    "access_token": "be5caf90-f197-43bf-86e2-cd4560066871",
+    "expires_in": 40917,
+    "refresh_token": "4b2991af-6e1b-40cc-ab83-3f0c135d8c12",
+    "scope": "read",
+    "token_type": "bearer"
 }</code></pre>
 </div>
 </div>
@@ -1155,30 +1100,30 @@ seen and used in java.</p>
 <div class="listingblock">
 <div class="title">test unauthorized forst</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http :8002/</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">http :8002/</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">response ouptu</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">error</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">unauthorized</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">error_description</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">Full authentication is required to access this resource</span><span class="delimiter">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+    "error": "unauthorized",
+    "error_description": "Full authentication is required to access this resource"
 }</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">now let&#8217;s use access_token to get resource-server data</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="bash">http :8002/ Authorization:'Bearer be5caf90-f197-43bf-86e2-cd4560066871'</code></pre>
+<pre class="highlightjs highlight"><code class="language-bash" data-lang="bash">http :8002/ Authorization:'Bearer be5caf90-f197-43bf-86e2-cd4560066871'</code></pre>
 </div>
 </div>
 <div class="listingblock">
 <div class="title">response ouptu</div>
 <div class="content">
-<pre class="CodeRay highlight"><code data-lang="json">{
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">at</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">2018-06-03T01:20:45.153Z</span><span class="delimiter">&quot;</span></span>,
-    <span class="key"><span class="delimiter">&quot;</span><span class="content">ololo</span><span class="delimiter">&quot;</span></span>: <span class="string"><span class="delimiter">&quot;</span><span class="content">trololo</span><span class="delimiter">&quot;</span></span>
+<pre class="highlightjs highlight"><code class="language-json" data-lang="json">{
+    "at": "2018-06-03T01:20:45.153Z",
+    "ololo": "trololo"
 }</code></pre>
 </div>
 </div>
@@ -1194,9 +1139,32 @@ seen and used in java.</p>
 </div>
 <div id="footer">
 <div id="footer-text">
-Version 0.0.1<br>
-Last updated 2018-06-04 05:40:38 EEST
+Version 0.0.2<br>
+Last updated 2018-09-04 14:23:38 UTC
 </div>
 </div>
+<!-- jquery -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<!-- highlight.js highlighter -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<!-- add other npn standard languages you are using in your documentation... -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/dos.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/java.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/groovy.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/gradle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/scala.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/kotlin.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/typescript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/javascript.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/json.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/markdown.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/xml.min.js"></script>
+<!-- bootstrap -->
+<script>hljs.initHighlightingOnLoad();</script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/styles/github.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/8.9.1/highlight.min.js"></script>
+<script>hljs.initHighlighting()</script>
 </body>
 </html>
