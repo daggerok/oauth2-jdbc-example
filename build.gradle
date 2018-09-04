@@ -67,3 +67,5 @@ wrapper {
 
 ].collect { "$rootDir/gradle/root/${it}.gradle" }
     .each { apply from: it }
+
+apply from: "$project.rootProject.projectDir/gradle/docs.gradle"

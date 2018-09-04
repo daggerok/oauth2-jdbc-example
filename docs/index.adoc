@@ -1,7 +1,9 @@
-= OAuth2 JDBC {project-name} ({project-version})
-////
-image:https://travis-ci.org/daggerok/security-first.svg?branch=master["Build Status", link={github-url}]
-////
+ifdef::backend-html5[]
+= {root-project-name} ({project-version}) image:https://travis-ci.org/daggerok/{root-project-name}.svg?branch=master["Build Status", link={github-url}]
+endif::backend-html5[]
+ifndef::backend-html5[]
+= {root-project-name} ({project-version})
+endif::backend-html5[]
 Maksim Kostromin <daggerok@gmail.com>
 {docdatetime}
 :doctype: book
@@ -13,15 +15,19 @@ Maksim Kostromin <daggerok@gmail.com>
 :hide-uri-scheme:
 :revnumber: {project-version}
 :example-caption!:
+////
+= OAuth2 JDBC {project-name} ({project-version})
+image:https://travis-ci.org/daggerok/security-first.svg?branch=master["Build Status", link={github-url}]
 
 Travis CI status:
 ifdef::backend-html5[image:https://travis-ci.org/daggerok/oauth2-jdbc-example.svg?branch=master["Build Status", link={github-url}]]
+////
 
-ifdef::backend-html5[link:./index.pdf["Documentation in PFD format"]]
+ifdef::backend-html5[link:./index.pdf[Documentation in PFD format]]
 
 == Introduction
 
-include::../../README.adoc[tags=content,indent=0]
+include::../README.adoc[tags=content,indent=0]
 
 Let's learn and share most important software development topic in the world.
 My personal lifestyle is always think about security first, and only after build any other application functionality.
@@ -66,6 +72,6 @@ seen and used in java.
 
 == Implementations
 
-include::../../apps/auth-server/README.adoc[]
-include::../../apps/resource-server/README.adoc[]
-include::../../apps/web-client-app/README.adoc[]
+include::../apps/auth-server/README.adoc[]
+include::../apps/resource-server/README.adoc[]
+include::../apps/web-client-app/README.adoc[]

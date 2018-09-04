@@ -1,10 +1,14 @@
 service:
 - docker
+
 env:
   global:
   - TERM=dumb
+  - secure: oBmMyK4EcdolQ+ktQfY+uo4AT0hYSQoga4w6fWjGLpMXPtwz87DX6QYO+MaZdy8byInlC5lmCzHc4mQwfT2DqOc3RrmUghNKr7lekOX6UhJVqKAeIHocto884Jznx4qpaHpD1lokwcMObAInVDJSyRJheI0d86SlUc6hPiYMz9xvejsyNb2bAkzq537Q4hO9NkHqpM7LHoRziYRuyAhkRX2q2g3nWEtXBIs9sb97RLUL7jCBU6zu7y6z1mY6KVGGg4VGK1Ci1GkDMw+uF4m8HFz9IYDFu4q0N1fsS5F3q8UtI6VVKWOs85GQ9o7R68ZhoTy/ev/qsYp7ekHR55sQLoyjdhXP0/PFRJGLYAqR+zyHW0dlGkt8GSQ4cEFriW6+INgYfnAJlDjWjcvM0dMC4mcxox+7tcpTxbUQ//kTMFe7/xTOoJqfT+flT+Hvn/OigNFRxw9EK5PqgLgIi+Fub4wxJOW8ZKTxXKBN0ymzYQ/7WQvkj0AIdC0tgvBFFWtoWNHg7piKOKxrCxJUjqKIQAh+CzNodkX3KkrBMMGHIKrzxfzYsliEKGBSZ0wPepY11KEJWun2AZ4J67CClXdC9HIYQVb3yry7GTVPeYrxL5xP5VxjFynD8VPYYZH8vvmQPnoqbg6baVoLd+Iy3y9htRX07CEM8yKbwCuumNc/Fko=
+
 language: java
 jdk: oraclejdk8
+
 addons:
   apt:
     update: true
@@ -14,6 +18,7 @@ addons:
     - bash
     - python-pip
     - docker-ce
+
 install: true
 before_install:
 - sudo pip install httpie docker-compose >/dev/null 2>&1
@@ -21,9 +26,10 @@ before_install:
 - stop_any 80 8000 8080 8081 8082 8083 8001 8002 8003
 - echo "org.gradle.console=auto" > gradle.properties
 script:
-- ./gradlew clean :docs:asciidoctor -b build.gradle || true
+- ./gradlew clean asciidoctor -b build.gradle || true
 - ./gradlew -S >/dev/null
 - ./gradlew --stop || true
+#
 - mkdir -p ~/.m2:/root/.m2 ~/.gradle:/root/.gradle
 - docker-compose build base-image
 - docker-compose run -v ~/.m2:/root/.m2 -v ~/.gradle:/root/.gradle build
@@ -31,19 +37,49 @@ script:
 - docker-compose logs -f -t &
 - sleep 35
 - wait_for 8001 8002 8003
-- http -a clientId:secret
+- http
+  -a clientId:secret
   --form post :8001/oauth/token
-  grant_type=password
-  username=usr
-  password=pwd
-- access_token=$(http -a clientId:secret --form post :8001/oauth/token grant_type=password username=usr password=pwd | jq .access_token)
-- access_token="${access_token%\"}" # remove prefixed (left) quote
-- access_token="${access_token#\"}" # remove suffix (right) quote
-- http -a clientId:secret --form post :8001/oauth/check_token token=$access_token
+    grant_type=password
+    username=usr
+    password=pwd
+- access_token=$(
+    http -a clientId:secret
+      --form post :8001/oauth/token
+        grant_type=password
+        username=usr
+        password=pwd | jq .access_token
+  )
+- access_token="${access_token%\"}"
+- access_token="${access_token#\"}"
+- http
+  -a clientId:secret
+  --form post :8001/oauth/check_token
+    token=$access_token
 - http :8002/ Authorization:"Bearer $access_token"
 - docker-compose stop
 - docker-compose down -v
+
+before_deploy: ./gradlew documentation
+
+deploy:
+  provider: pages
+  skip-cleanup: true
+  # travis encrypt GITHUB_TOKEN=<your github repo token> --add
+  github-token: "$GITHUB_TOKEN"
+  keep-history: true
+  on:
+    branch: master
+  local-dir: target/generated-docs
+  target_branch: gh-pages
+
+before_cache:
+- for item in $(find ~/.gradle -name "*.lock");
+    do sudo rm -rf $item ;
+  done
+
 cache:
   directories:
-  - "$HOME/.m2"
-  - "$HOME/.gradle"
+  - $HOME/.m2
+  - $HOME/.gradle
+  - $HOME/.docker

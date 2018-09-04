@@ -4,6 +4,7 @@
 ### Gradle / Maven ###
 .gradle/
 /build/
+/target/
 **/build/
 /out/
 **/out/

@@ -86,7 +86,7 @@ http -a clientId:secret \
 .application-h2.yaml
 [source,yaml]
 ----
-include::../../modules/jdbc/src/main/resources/application-h2.yaml[]
+include::./src/main/resources/application-h2.yaml[]
 ----
 
 [[DataSourceConfig]]

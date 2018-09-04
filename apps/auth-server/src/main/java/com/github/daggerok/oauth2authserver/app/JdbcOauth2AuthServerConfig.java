@@ -55,16 +55,16 @@ public class JdbcOauth2AuthServerConfig extends AuthorizationServerConfigurerAda
     clients
         .jdbc(dataSource)
           .withClient(resourceAppClient.getClientId())
-          .authorizedGrantTypes(resourceAppClient.getAuthorizedGrantTypes())
-          .secret(resourceAppClient.generateSecret(encoder))
-          .scopes(resourceAppClient.getScopes())
-          .autoApprove(resourceAppClient.isAutoApprove())
-          .and()
-        .withClient(passwordClient.getClientId())
-          .authorizedGrantTypes(passwordClient.getAuthorizedGrantTypes())
-          .secret(passwordClient.generateSecret(encoder))
-          .scopes(passwordClient.getScopes())
-          .autoApprove(passwordClient.isAutoApprove())
+            .authorizedGrantTypes(resourceAppClient.getAuthorizedGrantTypes())
+            .secret(resourceAppClient.generateSecret(encoder))
+            .scopes(resourceAppClient.getScopes())
+            .autoApprove(resourceAppClient.isAutoApprove())
+            .and()
+          .withClient(passwordClient.getClientId())
+            .authorizedGrantTypes(passwordClient.getAuthorizedGrantTypes())
+            .secret(passwordClient.generateSecret(encoder))
+            .scopes(passwordClient.getScopes())
+            .autoApprove(passwordClient.isAutoApprove())
     //@formatter:on
     ;
   }
